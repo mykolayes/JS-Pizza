@@ -1,9 +1,63 @@
-@mainColor: blue;
+@mainColor: orange;
 
-//@import "pizza/background";
-@import "pizza/container";
-@import "pizza/pizza-list-panel";
+@RightPanelWidth: 300px;
+@TopPanelHeight: 80px;
+@BottomPanelHeight: 125px;
+
 @import "pizza/pizza-card";
-@import "pizza/row";
-@import "pizza/cart";
-@import "pizza/thumbnail";
+@import "pizza/right-panel";
+@import "pizza/buttons";
+
+.main-pizza {
+  margin-right: @RightPanelWidth;
+  margin-top: @TopPanelHeight;
+  //margin-bottom: @BottomPanelHeight;
+}
+
+.inner-cointainer {
+  max-width: 1000px;
+  min-width: 300px;
+  margin:auto;
+  padding: 10px;
+}
+
+.pizza-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 15px;
+}
+
+.right-panel {
+  height: 100%;
+  width: @RightPanelWidth;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  background: green;
+}
+
+.top-panel {
+  height: @TopPanelHeight;
+  width: 100%;
+  padding-right: @RightPanelWidth;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: rgba(50,50,50,0.9);
+}
+
+.footer {
+  height: @BottomPanelHeight;
+  padding-top: 30px;
+  padding-right: @RightPanelWidth;
+  text-align: center;
+  //line-height: @BottomPanelHeight/2;
+  color: white;
+  background: rgba(50,50,50,0.9);
+  min-width: 600px;
+}
