@@ -7,11 +7,13 @@
 @import "pizza/pizza-card";
 @import "pizza/right-panel";
 @import "pizza/buttons";
+@import "pizza/top-panel";
 
 .main-pizza {
   margin-right: @RightPanelWidth;
   margin-top: @TopPanelHeight;
   //margin-bottom: @BottomPanelHeight;
+  background-color: lightyellow;
 }
 
 .inner-cointainer {
@@ -35,8 +37,9 @@
   position: fixed;
   top: 0;
   right: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-  background: green;
+  //background: green;
 }
 
 .top-panel {
@@ -51,19 +54,62 @@
   background: rgba(50,50,50,0.9);
 }
 
-.discount-badge {
+.kma-badge {
+  padding-top: 15px;
+  padding-bottom: 10px;
   position: fixed;
-  left: 40px;
+  left: 20px;
+  top: 0;
+  background: #EA862E;
+  width: 100px;
+  height: 90px;
+  border-left: solid;
+  border-right: solid;
+  border-color: #d16200;
+  border-width: 1px;
+  text-align: center;
+  color: white;
+}
+  .kma-logo, .kma-logo:visited, .kma-logo:hover .kma-logo:active, .kma-logo:focus, .kma-logo:active:focus, body .kma-logo:active:hover, .kma-logo:focus:active, .kma-logo:hover:active {
+    color: white;
+  }
+
+    .kma-logo-1 {
+      font-size: 20px;
+      //font-weight: bolder;
+    }
+
+    .kma-logo-2 {
+      font-size: 30px;
+      font-weight: bolder;
+    }
+
+  .kma-badge-bottom {
+    width: 100px;
+    height: 11px;
+    top: 90px;
+    left: -1px;
+
+    background-image: url(../images/discount.svg);
+    transform: rotate(180deg);
+    position: absolute;
+  }
+
+.discount-badge {
+  padding-top: 10px;
+  position: fixed;
+  left: 20px;
   bottom: 0;
   background: #EA862E;
   width: 100px;
-  height: 100px;
+  height: 110px;
   border-left: solid;
   border-right: solid;
   border-color: #d16200;
   border-width: 1px;
   text-align: center;
   font-size: 15px;
+  font-weight: bolder;
   color: white;
 }
   .discount-top {
