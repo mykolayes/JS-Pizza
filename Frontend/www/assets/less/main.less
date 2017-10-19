@@ -3,6 +3,7 @@
 @RightPanelWidth: 300px;
 @TopPanelHeight: 80px;
 @BottomPanelHeight: 125px;
+@PizzaSelectionPanelHeight: 120px;
 
 @import "pizza/pizza-card";
 @import "pizza/right-panel";
@@ -11,7 +12,7 @@
 
 .main-pizza {
   margin-right: @RightPanelWidth;
-  margin-top: @TopPanelHeight;
+  //margin-top: @TopPanelHeight;
   //margin-bottom: @BottomPanelHeight;
   background-color: lightyellow;
 }
@@ -53,6 +54,25 @@
 
   background: rgba(50,50,50,0.9);
 }
+
+.pizza-selection-panel {
+  padding-top: @TopPanelHeight;
+  padding-right: @RightPanelWidth;
+  //padding-left: 20px;
+  top: @TopPanelHeight;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: lightyellow;
+  min-width: 600px;
+  //margin: auto;
+}
+
+  .pizza-count {
+    font-size: 14px;
+    min-width: 10px;
+    background: orange;
+  }
 
 .kma-badge {
   padding-top: 15px;
