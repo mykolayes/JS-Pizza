@@ -32,7 +32,11 @@ function addToCart(pizza, size) {
 function removeFromCart(cart_item) {
     //Видалити піцу з кошика
     //TODO: треба зробити
+    var afterDel = Cart.filter(function( pizza_in_the_cart ) {
+        return pizza_in_the_cart !== (pizza_in_the_cart.pizza.title === cart_item.pizza.title && pizza_in_the_cart.size === cart_item.size);
+    });
 
+    Cart = afterDel;
     //Після видалення оновити відображення
     updateCart();
 }
@@ -71,6 +75,18 @@ function updateCart() {
             updateCart();
         });
 
+        $node.find(".minus").click(function(){
+            //Зменшуємо кількість замовлених піц
+            if (cart_item.quantity === 1){
+                removeFromCart(cart_item);
+            }
+            else {
+                cart_item.quantity -= 1;
+            }
+            //Оновлюємо відображення
+            updateCart();
+        });
+
         $cart.append($node);
     }
 
@@ -85,3 +101,5 @@ exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
+
+exports.updateCart = updateCart;

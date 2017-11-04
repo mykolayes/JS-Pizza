@@ -18,11 +18,33 @@ function showPizzaList(list) {
 
         var $node = $(html_code);
 
-        $node.find(".buy-big").click(function(){
-            PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
+
+        $node.find(".buy-button-big").click(function(){
+            var currCart = PizzaCart.getPizzaInCart();
+            var alreadyThere = currCart.filter(function( pizza_in_the_cart ) {
+                return pizza_in_the_cart.pizza == pizza && pizza_in_the_cart.size == PizzaCart.PizzaSize.Big;
+            });
+            if (alreadyThere.length === 0) {
+                PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
+            }
+            else {
+                alreadyThere[0].quantity+=1;
+                alreadyThere[0].price+=pizza.price;
+                PizzaCart.updateCart();
+            }
         });
-        $node.find(".buy-small").click(function(){
-            PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
+        $node.find(".buy-button-small").click(function(){
+            var currCart = PizzaCart.getPizzaInCart();
+            var alreadyThere = currCart.filter(function( pizza_in_the_cart ) {
+                return pizza_in_the_cart.pizza == pizza && pizza_in_the_cart.size == PizzaCart.PizzaSize.Small;
+            });
+            if (alreadyThere.length === 0) {
+                PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
+            }
+            else {
+                alreadyThere[0].quantity+=1;
+                PizzaCart.updateCart();
+            }
         });
 
         $pizza_list.append($node);

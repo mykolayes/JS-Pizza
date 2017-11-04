@@ -40,7 +40,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
 
-  background: #d4d4d4;
+  background: #f3f3f3;
 
   border-top-width: 1px;
   border-top-style: solid;
@@ -50,6 +50,63 @@
   border-left-style: solid;
   border-left-color: #b2b2b2;
 }
+  .pizza-cart-item {
+    position: relative;
+    width:100%;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #d4d4d4;
+
+    background: #f3f3f3;
+
+    padding: 15px;
+  }
+
+    .pizza-cart-details {
+      display: inline-block;
+    }
+
+    .pizza-cart-title {
+      font-size: 20px;
+      color: orange;
+    }
+
+    .pizza-cart-specs {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .pizza-cart-weight-icon {
+      margin-left: 15px;
+    }
+
+    .pizza-cart-price {
+      display: inline-block;
+      width: 60px;
+      max-width: 60px;
+      font-size: 15px;
+      font-weight: bolder;
+      margin-right: 7px;
+    }
+
+    .pizza-cart-amount {
+      color: #636363;
+      font-size: 14px;
+    }
+
+    .pizza-icon-cart {
+      position: absolute;
+      right: -45px;
+      top: 15px;
+      height: 90px;
+      //margin-top: 15px;
+      margin-bottom: 15px;
+
+      border-top-left-radius: 50%;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 50%;
+    }
 
 .bottom-part {
   height: @TopPanelHeight+70px;
