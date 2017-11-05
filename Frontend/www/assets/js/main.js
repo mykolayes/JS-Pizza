@@ -246,7 +246,8 @@ function addToCart(pizza, size) {
             pizza: pizza,
             size: size,
             quantity: 1,
-            price: pizza[size].price
+            price: pizza[size].price,
+            content: pizza.content
         });
     }
     else {
@@ -420,39 +421,60 @@ function showPizzaList(list) {
 
 function filterPizza(filter) {
 
-    var $node = $("#pizza-types");
+    //var $node = $("#pizza-types");
 
-    var pizza_type_filter = "all";
+    //var pizza_type_filter = "all";
 
     //Масив куди потраплять піци які треба показати
     var pizza_shown = [];
 
-    $node.find("#filter-button-all-pizza").click(function(){
-        pizza_type_filter = "all";
-    });
+    //$node.find("#filter-button-all-pizza").click(function(){
+    //    pizza_type_filter = "all";
+    //});
 
-    $node.find("#filter-button-meat").click(function(){
-        pizza_type_filter = "meat";
-    });
+    //$node.find("#filter-button-meat").click(function(){
+    //    pizza_type_filter = "meat";
+    //});
 
     Pizza_List.forEach(function(pizza){
         //Якщо піка відповідає фільтру
-        if(pizza_type_filter == "all") {
+        if(filter == "filter-button-all-pizza") {
             pizza_shown.push(pizza);
         }
-        else if (pizza_type_filter == "meat") {
-            if (pizza[content].meat) {
+        else if (filter == "filter-button-meat") {
+            if (pizza.content.meat) {
                 pizza_shown.push(pizza);
             }
         }
-        //pizza_shown.push(pizza);
-
-        //TODO: зробити фільтри
+        else if (filter == "filter-button-pineapples") {
+            if (pizza.content.pineapple) {
+                pizza_shown.push(pizza);
+            }
+        }
+        else if (filter == "filter-button-mushrooms") {
+            if (pizza.content.mushroom) {
+                pizza_shown.push(pizza);
+            }
+        }
+        else if (filter == "filter-button-ocean") {
+            if (pizza.content.ocean) {
+                pizza_shown.push(pizza);
+            }
+        }
+        else if (filter == "filter-button-tomato") {
+            if (pizza.content.tomato) {
+                pizza_shown.push(pizza);
+            }
+        }
     });
     pizzas_amount_shown = pizza_shown.length;
     //Показати відфільтровані піци
     showPizzaList(pizza_shown);
 }
+
+$(".pizza-filter-button").click(function() {
+    filterPizza(this.id);
+});
 
 function initialiseMenu() {
     //Показуємо усі піци

@@ -39,7 +39,8 @@ function addToCart(pizza, size) {
             pizza: pizza,
             size: size,
             quantity: 1,
-            price: pizza[size].price
+            price: pizza[size].price,
+            content: pizza.content
         });
     }
     else {
