@@ -21,10 +21,10 @@
     <div class="page-title">
         <h2>
             <span class="count-tile">Усі піци</span>
-            <span class="badge pizza-count">0</span>
+            <span class="badge pizza-count" id="pizza-menu-counter">0</span>
         </h2>
     </div>
-    <div class="row all-pizza-type-wrap">
+    <div class="row all-pizza-type-wrap" id="pizza-types">
         <!--<div class="row">-->
             <div class="col-sm-12 pizza-selection-buttons">
                 <div class="nav nav-pills all-pizza-type">
@@ -521,8 +521,8 @@
 <div class="right-panel">
     <div class="top-part">
         <span class="orders">Замовлення</span>
-        <span class="badge amount-of-orders">0</span>
-        <span class="clear-orders">Очистити замовлення</span>
+        <span class="badge amount-of-orders" id="total-quantity">0</span>
+        <span class="clear-orders" id="clear-btn">Очистити замовлення</span>
     </div>
 
     <div class="middle-part" id="cart">
@@ -580,7 +580,7 @@
     <div class="bottom-part">
         <span class="sum-of-order">Сума замовлення:</span>
         <span class="order-price">
-            <span class="order-price-integer">0</span>
+            <span class="order-price-integer" id="order-price-int">0</span>
             грн.
         </span>
         <a class="btn btn-primary btn-order">

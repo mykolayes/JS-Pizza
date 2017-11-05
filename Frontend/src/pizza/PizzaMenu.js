@@ -8,6 +8,9 @@ var Pizza_List = require('../Pizza_List');
 //HTML едемент куди будуть додаватися піци
 var $pizza_list = $("#pizza_list");
 
+var pizzas_amount_shown = 8;
+var $pizzas_shown = $("#pizza-menu-counter");
+
 function showPizzaList(list) {
     //Очищаємо старі піци в кошику
     $pizza_list.html("");
@@ -20,50 +23,51 @@ function showPizzaList(list) {
 
 
         $node.find(".buy-button-big").click(function(){
-            var currCart = PizzaCart.getPizzaInCart();
-            var alreadyThere = currCart.filter(function( pizza_in_the_cart ) {
-                return pizza_in_the_cart.pizza == pizza && pizza_in_the_cart.size == PizzaCart.PizzaSize.Big;
-            });
-            if (alreadyThere.length === 0) {
-                PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
-            }
-            else {
-                alreadyThere[0].quantity+=1;
-                alreadyThere[0].price+=pizza.price;
-                PizzaCart.updateCart();
-            }
+            PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
         });
         $node.find(".buy-button-small").click(function(){
-            var currCart = PizzaCart.getPizzaInCart();
-            var alreadyThere = currCart.filter(function( pizza_in_the_cart ) {
-                return pizza_in_the_cart.pizza == pizza && pizza_in_the_cart.size == PizzaCart.PizzaSize.Small;
-            });
-            if (alreadyThere.length === 0) {
-                PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
-            }
-            else {
-                alreadyThere[0].quantity+=1;
-                PizzaCart.updateCart();
-            }
+            PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
         });
 
         $pizza_list.append($node);
     }
 
     list.forEach(showOnePizza);
+    $pizzas_shown.text(pizzas_amount_shown);
 }
 
 function filterPizza(filter) {
+
+    var $node = $("#pizza-types");
+
+    var pizza_type_filter = "all";
+
     //Масив куди потраплять піци які треба показати
     var pizza_shown = [];
 
+    $node.find("#filter-button-all-pizza").click(function(){
+        pizza_type_filter = "all";
+    });
+
+    $node.find("#filter-button-meat").click(function(){
+        pizza_type_filter = "meat";
+    });
+
     Pizza_List.forEach(function(pizza){
         //Якщо піка відповідає фільтру
+        if(pizza_type_filter == "all") {
+            pizza_shown.push(pizza);
+        }
+        else if (pizza_type_filter == "meat") {
+            if (pizza[content].meat) {
+                pizza_shown.push(pizza);
+            }
+        }
         //pizza_shown.push(pizza);
 
         //TODO: зробити фільтри
     });
-
+    pizzas_amount_shown = pizza_shown.length;
     //Показати відфільтровані піци
     showPizzaList(pizza_shown);
 }
