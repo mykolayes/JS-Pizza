@@ -56,29 +56,35 @@ function filterPizza(filter) {
     Pizza_List.forEach(function(pizza){
         //Якщо піка відповідає фільтру
         if(filter == "filter-button-all-pizza") {
+            $(".count-title").text("Усі піци");
             pizza_shown.push(pizza);
         }
         else if (filter == "filter-button-meat") {
+            $(".count-title").text("М'ясні піци");
             if (pizza.content.meat) {
                 pizza_shown.push(pizza);
             }
         }
         else if (filter == "filter-button-pineapples") {
+            $(".count-title").text("Піци з ананасами");
             if (pizza.content.pineapple) {
                 pizza_shown.push(pizza);
             }
         }
         else if (filter == "filter-button-mushrooms") {
+            $(".count-title").text("Піци з грибами");
             if (pizza.content.mushroom) {
                 pizza_shown.push(pizza);
             }
         }
         else if (filter == "filter-button-ocean") {
+            $(".count-title").text("Піци з морепродуктами");
             if (pizza.content.ocean) {
                 pizza_shown.push(pizza);
             }
         }
         else if (filter == "filter-button-tomato") {
+            $(".count-title").text("Вегетаріанські піци");
             if (pizza.content.tomato) {
                 pizza_shown.push(pizza);
             }

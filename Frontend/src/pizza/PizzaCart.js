@@ -3,6 +3,20 @@
  */
 var Templates = require('../Templates');
 
+var basil = require('basil.js');
+basil = new basil();
+
+exports.get = function(key) {
+        return basil.get(key);
+    };
+
+exports.set = function(key, value) {
+        return basil.set(key, value);
+    };
+
+// var Storage = require('../storage/storage');
+// var orders = {};
+
 //Перелік розмірів піци
 var PizzaSize = {
     Big: "big_size",
@@ -80,7 +94,19 @@ function initialiseCart() {
     //Фукнція віпрацьвуватиме при завантаженні сторінки
     //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
     //TODO: ...
-
+    var saved_orders = basil.get('cart');
+    var saved_orders_price = basil.get('order_total');
+    var saved_orders_quantity = basil.get('number_of_pizzas');
+    if(saved_orders) {
+        Cart = saved_orders;
+        //Cart = orders;
+    }
+    if(saved_orders_price) {
+        total = saved_orders_price;
+    }
+    if (saved_orders_quantity) {
+        total_quantity = saved_orders_quantity;
+    }
     updateCart();
 }
 
@@ -136,11 +162,17 @@ function updateCart() {
             removeFromCart(cart_item);
         });
 
+        $order_total.text(total);
+        $total_quant.text(total_quantity);
         $cart.append($node);
     }
 
     Cart.forEach(showOnePizzaInCart);
 
+    //orders = Cart;
+    basil.set("cart", Cart);
+    basil.set("order_total", total);
+    basil.set("number_of_pizzas", total_quantity);
 }
 
 // function removeAll() {
