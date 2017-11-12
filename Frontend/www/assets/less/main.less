@@ -1,9 +1,172 @@
-@mainColor: blue;
+@mainColor: orange;
 
-//@import "pizza/background";
-@import "pizza/container";
-@import "pizza/pizza-list-panel";
+@RightPanelWidth: 300px;
+@TopPanelHeight: 80px;
+@BottomPanelHeight: 125px;
+@PizzaSelectionPanelHeight: 120px;
+
 @import "pizza/pizza-card";
-@import "pizza/row";
-@import "pizza/cart";
-@import "pizza/thumbnail";
+@import "pizza/right-panel";
+@import "pizza/buttons";
+@import "pizza/top-panel";
+@import "order";
+
+.main-pizza {
+  margin-right: @RightPanelWidth;
+  //margin-top: @TopPanelHeight;
+  //margin-bottom: @BottomPanelHeight;
+  background-color: lightyellow;
+}
+
+.inner-cointainer {
+  max-width: 1000px;
+  min-width: 300px;
+  margin:auto;
+  padding: 10px;
+}
+
+.pizza-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 15px;
+}
+
+.right-panel {
+  height: 100%;
+  width: @RightPanelWidth;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  //background: green;
+}
+
+.top-panel {
+  height: @TopPanelHeight;
+  width: 100%;
+  padding-right: @RightPanelWidth;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: rgba(50,50,50,0.9);
+}
+
+.pizza-selection-panel {
+  padding-top: @TopPanelHeight;
+  padding-right: @RightPanelWidth;
+  //padding-left: 20px;
+  top: @TopPanelHeight;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: lightyellow;
+  min-width: 600px;
+  //margin: auto;
+}
+
+  .pizza-count {
+    font-size: 14px;
+    min-width: 10px;
+    background: orange;
+  }
+
+.kma-badge {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  position: fixed;
+  left: 20px;
+  top: 0;
+  background: #EA862E;
+  width: 100px;
+  height: 90px;
+  border-left: solid;
+  border-right: solid;
+  border-color: #d16200;
+  border-width: 1px;
+  text-align: center;
+  color: white;
+}
+  .kma-logo, .kma-logo:visited, .kma-logo:hover .kma-logo:active, .kma-logo:focus, .kma-logo:active:focus, body .kma-logo:active:hover, .kma-logo:focus:active, .kma-logo:hover:active {
+    color: white;
+  }
+
+    .kma-logo-1 {
+      font-size: 20px;
+      //font-weight: bolder;
+    }
+
+    .kma-logo-2 {
+      font-size: 30px;
+      font-weight: bolder;
+    }
+
+  .kma-badge-bottom {
+    width: 100px;
+    height: 11px;
+    top: 90px;
+    left: -1px;
+
+    background-image: url(../images/discount.svg);
+    transform: rotate(180deg);
+    position: absolute;
+  }
+
+.discount-badge {
+  padding-top: 10px;
+  position: fixed;
+  left: 20px;
+  bottom: 0;
+  background: #EA862E;
+  width: 100px;
+  height: 110px;
+  border-left: solid;
+  border-right: solid;
+  border-color: #d16200;
+  border-width: 1px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bolder;
+  color: white;
+}
+  .discount-top {
+      width: 100px;
+      height: 11px;
+      top: -11px;
+      left: -1px;
+      background-image: url(../images/discount.svg);
+      //background-size: 100px 11px;
+      //background-repeat: no-repeat;
+      //padding: 0!important;
+      //margin: 0!important;
+      position: absolute;
+  }
+
+  .discount-badge-title {
+    border-bottom: 2px;
+    border-bottom-style: dotted;
+    padding-bottom: 3px;
+    margin-bottom: 7px;
+    //font-size: 15px;
+  }
+
+.footer {
+  height: @BottomPanelHeight;
+  padding-top: 30px;
+  padding-right: @RightPanelWidth;
+  text-align: center;
+  //line-height: @BottomPanelHeight/2;
+  color: white;
+  background: rgba(50,50,50,0.9);
+  min-width: 600px;
+}
+
+//other
+
+//.pizza-currency {
+//  font-size: 14px;
+//}
