@@ -62,6 +62,7 @@ $(function(){
     var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
     //var Pizza_List = require('./Pizza_List');
+    //var Order = require('./Order');
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
@@ -291,7 +292,7 @@ exports.updateCart = updateCart;
 var Templates = require('../Templates');
 var PizzaCart = require('./PizzaCart');
 //var Pizza_List = require('../Pizza_List');
-var backendAPI = require('../API');
+var frontendAPI = require('../API');
 
 var Pizza_List = [];
 
@@ -397,11 +398,11 @@ $(".pizza-filter-button").click(function() {
 });
 
 function initialiseMenu() {
-    //backendAPI.getPizzaList(get_pizza_list);
+    //frontendAPI.getPizzaList(get_pizza_list);
 
     //Показуємо усі піци
 
-    backendAPI.getPizzaList(function(err, list){
+    frontendAPI.getPizzaList(function(err, list){
         if (err) {
             alert("Can't load pizzas.")
         } else {
@@ -1842,34 +1843,29 @@ exports.cache = {
 
 },{}],10:[function(require,module,exports){
 module.exports={
-  "_args": [
-    [
-      "ejs@2.5.7",
-      "F:\\Storage(Software)\\Developing\\GitHUBDesktop\\Local Projects' Directory\\JS-Pizza"
-    ]
-  ],
-  "_from": "ejs@2.5.7",
+  "_from": "ejs@^2.4.1",
   "_id": "ejs@2.5.7",
   "_inBundle": false,
   "_integrity": "sha1-zIcsFoiArjxxiXYv1f/ACJbJUYo=",
   "_location": "/ejs",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "ejs@2.5.7",
+    "raw": "ejs@^2.4.1",
     "name": "ejs",
     "escapedName": "ejs",
-    "rawSpec": "2.5.7",
+    "rawSpec": "^2.4.1",
     "saveSpec": null,
-    "fetchSpec": "2.5.7"
+    "fetchSpec": "^2.4.1"
   },
   "_requiredBy": [
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.5.7.tgz",
-  "_spec": "2.5.7",
-  "_where": "F:\\Storage(Software)\\Developing\\GitHUBDesktop\\Local Projects' Directory\\JS-Pizza",
+  "_shasum": "cc872c168880ae3c7189762fd5ffc00896c9518a",
+  "_spec": "ejs@^2.4.1",
+  "_where": "C:\\Users\\Nikolya\\Documents\\GitHub\\JS-Pizza",
   "author": {
     "name": "Matthew Eernisse",
     "email": "mde@fleegix.org",
@@ -1878,6 +1874,7 @@ module.exports={
   "bugs": {
     "url": "https://github.com/mde/ejs/issues"
   },
+  "bundleDependencies": false,
   "contributors": [
     {
       "name": "Timothy Gu",
@@ -1886,6 +1883,7 @@ module.exports={
     }
   ],
   "dependencies": {},
+  "deprecated": false,
   "description": "Embedded JavaScript templates",
   "devDependencies": {
     "browserify": "^13.0.1",

@@ -4,7 +4,7 @@
 var Templates = require('../Templates');
 var PizzaCart = require('./PizzaCart');
 //var Pizza_List = require('../Pizza_List');
-var backendAPI = require('../API');
+var frontendAPI = require('../API');
 
 var Pizza_List = [];
 
@@ -110,11 +110,11 @@ $(".pizza-filter-button").click(function() {
 });
 
 function initialiseMenu() {
-    //backendAPI.getPizzaList(get_pizza_list);
+    //frontendAPI.getPizzaList(get_pizza_list);
 
     //Показуємо усі піци
 
-    backendAPI.getPizzaList(function(err, list){
+    frontendAPI.getPizzaList(function(err, list){
         if (err) {
             alert("Can't load pizzas.")
         } else {

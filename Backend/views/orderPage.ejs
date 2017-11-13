@@ -1,8 +1,35 @@
 <% include common/header.ejs %>
 <div class="order-page-layout">
+    <!--<div class="inner-cointainer">-->
     <div class="order-field">
-        x
+        <div class="client-contact-info">
+            1. Контактні дані
+        </div>
+        <div class="client-name">
+            Ім'я
+        </div>
+        <input type="text" class="client-name-field" id = "nameField" value="" placeholder="Ваше ім'я" onblur="checkName()">
+        <br>
+        <div class="client-phone-number">
+            Телефон
+        </div>
+        <input type="text" class="client-phone-field" id = "phoneField" value="" placeholder="Ваш номер телефону (формат: +38(012)1234567)">
+        <br>
+        <div class="client-address-number">
+            Адреса
+        </div>
+        <input type="text" class="client-address-field" id = "addressField" value="" placeholder="Ваша адреса">
+
+
     </div>
+    <!--<script>-->
+        <!--function checkName() {-->
+            <!--var x = document.getElementById("nameField");-->
+            <!--x.value = x.value.toUpperCase();-->
+        <!--}-->
+    <!--</script>-->
+
+    <!--</div>-->
     <div class="right-panel">
         <div class="top-part">
             <span class="orders">Замовлення</span>
