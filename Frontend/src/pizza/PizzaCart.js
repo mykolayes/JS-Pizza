@@ -198,13 +198,30 @@ function updateCart() {
 //
 // }
 $(".clear-orders").click(function() {
+    // Cart = [];
+    // total = 0;
+    // $order_total.text(total);
+    // total_quantity = 0;
+    // $total_quant.text(total_quantity);
+    // updateCart();
+    clearOrder();
+});
+
+// href="/order.html"
+$(".btn-order").click(function() {
+   if (total_quantity != 0) {
+       window.location = "/order.html";
+   }
+});
+
+function clearOrder() {
     Cart = [];
     total = 0;
     $order_total.text(total);
     total_quantity = 0;
     $total_quant.text(total_quantity);
     updateCart();
-});
+}
 
 function createOrder(callback) {
     API.createOrder({
@@ -230,3 +247,4 @@ exports.PizzaSize = PizzaSize;
 exports.updateCart = updateCart;
 
 exports.createOrder = createOrder;
+exports.clearOrder = clearOrder;

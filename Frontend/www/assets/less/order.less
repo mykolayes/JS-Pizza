@@ -4,18 +4,22 @@
 @TopPanelHeight: 80px;
 
 .order-page-layout {
-  .minus, .del, .plus, .btn-order {
+  background-color: lightyellow;
+  .minus, .del, .plus, .btn-order, .clear-orders {
     display: none;
   }
-
 }
 
   .order-field {
     margin-top: @TopPanelHeight;
-    margin-right: @RightPanelWidth;
-    background-color: lightyellow;
+    //margin-right: @RightPanelWidth;
+    position: relative;
+    display: inline-block;
+    width: 50%;
     //text-align: center;
-    padding-left: 30%;
+    padding-top: 5%;
+//    padding-left: 30%;
+    padding-left: 5%;
 
     //max-width: 1000px;
     min-width: 300px;
@@ -29,11 +33,11 @@
 
     .client-name, .client-phone-number, .client-address-number {
       display: inline-block;
-      text-align: right;
+      text-align: left;
       width: 100px;
       max-width: 100px;
       min-width: 100px;
-      margin-right: 10px;
+      //margin-right: 10px;
       margin-top: 20px;
       margin-bottom: 5px;
       font-weight: bolder;
@@ -42,6 +46,11 @@
     .client-name-field, .client-phone-field, .client-address-field {
       display: inline-block;
       width: 250px;
-      max-width: 400px;
-      min-width: 400px;
+      max-width: 370px;
+      min-width: 370px;
+    }
+
+    .client-name-typo, .client-phone-typo, .client-address-typo {
+      color: red;
+      display: none;
     }

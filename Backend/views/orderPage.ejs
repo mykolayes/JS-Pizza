@@ -6,20 +6,34 @@
             1. Контактні дані
         </div>
         <div class="client-name">
-            Ім'я
+            ПІБ
         </div>
-        <input type="text" class="client-name-field" id = "nameField" value="" placeholder="Ваше ім'я" onblur="checkName()">
+        <!--<input type="text" class="client-name-field" id = "nameField" value="" placeholder="Ваше ПІБ" onblur=checkName()>-->
+        <input type="text" class="client-name-field" id = "nameField" value="" placeholder="Ваше ПІБ">
+        <!--<br>-->
+        <div class="client-name-typo">
+            Обов'язково надайте своє ім'я!
+        </div>
         <br>
         <div class="client-phone-number">
             Телефон
         </div>
-        <input type="text" class="client-phone-field" id = "phoneField" value="" placeholder="Ваш номер телефону (формат: +38(012)1234567)">
+        <input type="text" class="client-phone-field" id = "phoneField" value="" placeholder="Формат: +38(012)1234567">
+        <div class="client-phone-typo">
+            Обов'язково надайте свій номер телефону! <br>Формат: +38(012)1234567 або 380121234567.
+        </div>
         <br>
         <div class="client-address-number">
             Адреса
         </div>
         <input type="text" class="client-address-field" id = "addressField" value="" placeholder="Ваша адреса">
-
+        <div class="client-address-typo">
+            Обов'язково надайте свою адресу!
+        </div>
+        <br>
+        <a class="btn btn-primary btn-next">
+            <span class="next-text">Далі</span>
+        </a>
 
     </div>
     <!--<script>-->

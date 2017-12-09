@@ -67,14 +67,70 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
 
-    $(".btn-order").click(function(){
+    var nameOK, phoneOK, addrOK = false;
+
+    $(".btn-next").click(function(){
+        if (nameOK && phoneOK && addrOK) {
        PizzaCart.createOrder(function (err, data) {
            if (err) {
                alert("Can't create order!");
            } else {
-               alert("Order successfully created" + JSON.stringify(data));
+//               alert("Order successfully created" + JSON.stringify(data));
+               alert("Order successfully created.");
+
+               PizzaCart.clearOrder();
+               window.location = "./";
            }
        })
+        }
+        else {
+            alert("Missing or incorrect contact details!");
+        }
+    });
+
+    $("#nameField").blur(function() {
+        //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        var name = $("#nameField").val();
+        if(name!=="") {
+            $(".client-name-typo").css("display","none");
+            $(".client-name-field").css("border-color", "green");
+            nameOK = true;
+        }
+        else {
+            $(".client-name-typo").css("display","block");
+            $(".client-name-field").css("border-color", "red");
+            nameOK = false;
+        }
+    });
+
+    $("#phoneField").blur(function() {
+        //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        var phone_num = $("#phoneField").val();
+        if(!phone_num.match(/^[+0-9()]+$/g) !== null && (phone_num.length == 12 || phone_num.length == 13 || phone_num.length == 14 || phone_num.length == 15)) {
+            $(".client-phone-typo").css("display","none");
+            $(".client-phone-field").css("border-color", "green");
+            phoneOK = true;
+        }
+        else {
+            $(".client-phone-typo").css("display","block");
+            $(".client-phone-field").css("border-color", "red");
+            phoneOK = false;
+        }
+    });
+
+    $("#addressField").blur(function() {
+        //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        var name = $("#addressField").val();
+        if(name!=="") {
+            $(".client-address-typo").css("display","none");
+            $(".client-address-field").css("border-color", "green");
+            addrOK = true;
+        }
+        else {
+            $(".client-address-typo").css("display","block");
+            $(".client-address-field").css("border-color", "red");
+            addrOK = false;
+        }
     });
 });
 },{"./pizza/PizzaCart":4,"./pizza/PizzaMenu":5}],4:[function(require,module,exports){
@@ -278,13 +334,30 @@ function updateCart() {
 //
 // }
 $(".clear-orders").click(function() {
+    // Cart = [];
+    // total = 0;
+    // $order_total.text(total);
+    // total_quantity = 0;
+    // $total_quant.text(total_quantity);
+    // updateCart();
+    clearOrder();
+});
+
+// href="/order.html"
+$(".btn-order").click(function() {
+   if (total_quantity != 0) {
+       window.location = "/order.html";
+   }
+});
+
+function clearOrder() {
     Cart = [];
     total = 0;
     $order_total.text(total);
     total_quantity = 0;
     $total_quant.text(total_quantity);
     updateCart();
-});
+}
 
 function createOrder(callback) {
     API.createOrder({
@@ -310,6 +383,7 @@ exports.PizzaSize = PizzaSize;
 exports.updateCart = updateCart;
 
 exports.createOrder = createOrder;
+exports.clearOrder = clearOrder;
 },{"../API":1,"../Templates":2,"basil.js":6}],5:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
@@ -1868,29 +1942,34 @@ exports.cache = {
 
 },{}],10:[function(require,module,exports){
 module.exports={
-  "_from": "ejs@^2.4.1",
+  "_args": [
+    [
+      "ejs@2.5.7",
+      "F:\\Storage(Software)\\Developing\\GitHUBDesktop\\Local Projects' Directory\\JS-Pizza"
+    ]
+  ],
+  "_from": "ejs@2.5.7",
   "_id": "ejs@2.5.7",
   "_inBundle": false,
   "_integrity": "sha1-zIcsFoiArjxxiXYv1f/ACJbJUYo=",
   "_location": "/ejs",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "ejs@^2.4.1",
+    "raw": "ejs@2.5.7",
     "name": "ejs",
     "escapedName": "ejs",
-    "rawSpec": "^2.4.1",
+    "rawSpec": "2.5.7",
     "saveSpec": null,
-    "fetchSpec": "^2.4.1"
+    "fetchSpec": "2.5.7"
   },
   "_requiredBy": [
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.5.7.tgz",
-  "_shasum": "cc872c168880ae3c7189762fd5ffc00896c9518a",
-  "_spec": "ejs@^2.4.1",
-  "_where": "C:\\Users\\Nikolya\\Documents\\GitHub\\JS-Pizza",
+  "_spec": "2.5.7",
+  "_where": "F:\\Storage(Software)\\Developing\\GitHUBDesktop\\Local Projects' Directory\\JS-Pizza",
   "author": {
     "name": "Matthew Eernisse",
     "email": "mde@fleegix.org",
@@ -1899,7 +1978,6 @@ module.exports={
   "bugs": {
     "url": "https://github.com/mde/ejs/issues"
   },
-  "bundleDependencies": false,
   "contributors": [
     {
       "name": "Timothy Gu",
@@ -1908,7 +1986,6 @@ module.exports={
     }
   ],
   "dependencies": {},
-  "deprecated": false,
   "description": "Embedded JavaScript templates",
   "devDependencies": {
     "browserify": "^13.0.1",
