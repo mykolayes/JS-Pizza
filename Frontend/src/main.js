@@ -8,9 +8,11 @@ $(function(){
     var PizzaCart = require('./pizza/PizzaCart');
     //var Pizza_List = require('./Pizza_List');
     //var Order = require('./Order');
+    var Maps = require('./maps');
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
+    Maps.initialize();
 
     var nameOK, phoneOK, addrOK = false;
 
@@ -63,9 +65,21 @@ $(function(){
         }
     });
 
+    function parseCoords(err, coords) {
+        if (!err) {
+            $("#addressField").val = coords;
+        } else {
+            $("#addressField").val = "";
+            Console.log("Inexistent address.");
+        }
+
+    }
+
     $("#addressField").blur(function() {
         //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         var name = $("#addressField").val();
+        // if(name!=="" && Maps.geocodeAddress(name, err)) {
+        Maps.geocodeAddress(name, parseCoords);
         if(name!=="") {
             $(".client-address-typo").css("display","none");
             $(".client-address-field").css("border-color", "green");
