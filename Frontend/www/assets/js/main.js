@@ -66,13 +66,23 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
 
-
+    $(".btn-order").click(function(){
+       PizzaCart.createOrder(function (err, data) {
+           if (err) {
+               alert("Can't create order!");
+           } else {
+               alert("Order successfully created" + JSON.stringify(data));
+           }
+       })
+    });
 });
 },{"./pizza/PizzaCart":4,"./pizza/PizzaMenu":5}],4:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
 var Templates = require('../Templates');
+
+var API = require('../API');
 
 var basil = require('basil.js');
 basil = new basil();
@@ -275,6 +285,19 @@ $(".clear-orders").click(function() {
     updateCart();
 });
 
+function createOrder(callback) {
+    API.createOrder({
+        name: "client name tbd",
+        phone: "890900008822",
+        order: Cart
+    }, function(err, result){
+       if (err) {
+           return callback(err);
+       }
+       callback(null, result);
+    });
+}
+
 exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;
 
@@ -284,7 +307,9 @@ exports.initialiseCart = initialiseCart;
 exports.PizzaSize = PizzaSize;
 
 exports.updateCart = updateCart;
-},{"../Templates":2,"basil.js":6}],5:[function(require,module,exports){
+
+exports.createOrder = createOrder;
+},{"../API":1,"../Templates":2,"basil.js":6}],5:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
