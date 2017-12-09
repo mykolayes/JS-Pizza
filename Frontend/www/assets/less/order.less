@@ -3,13 +3,45 @@
 @RightPanelWidth: 300px;
 @TopPanelHeight: 80px;
 
-.order-field {
-  margin-top: @TopPanelHeight;
-  margin-right: @RightPanelWidth;
-}
-
 .order-page-layout {
   .minus, .del, .plus, .btn-order {
     display: none;
   }
+
 }
+
+  .order-field {
+    margin-top: @TopPanelHeight;
+    margin-right: @RightPanelWidth;
+    background-color: lightyellow;
+    //text-align: center;
+    padding-left: 30%;
+
+    //max-width: 1000px;
+    min-width: 300px;
+    //margin:auto;
+    //padding: 10px;
+  }
+
+    .client-contact-info {
+      font-size: 20px;
+    }
+
+    .client-name, .client-phone-number, .client-address-number {
+      display: inline-block;
+      text-align: right;
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      margin-right: 10px;
+      margin-top: 20px;
+      margin-bottom: 5px;
+      font-weight: bolder;
+    }
+
+    .client-name-field, .client-phone-field, .client-address-field {
+      display: inline-block;
+      width: 250px;
+      max-width: 400px;
+      min-width: 400px;
+    }
