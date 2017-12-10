@@ -56,6 +56,7 @@ exports.PizzaCart_OneItem = ejs.compile("<div class=\"pizza-cart-item\">\n    <d
 /**
  * Created by chaika on 25.01.16.
  */
+var nameOK, phoneOK, addrOK = false;
 
 $(function(){
     //This code will execute when the page is ready
@@ -69,7 +70,6 @@ $(function(){
     PizzaMenu.initialiseMenu();
     Maps.initialize();
 
-    var nameOK, phoneOK, addrOK = false;
 
     $(".btn-next").click(function(){
         if (nameOK && phoneOK && addrOK) {
@@ -122,23 +122,37 @@ $(function(){
 
     function parseCoords(err, coords) {
         if (!err) {
-            $("#addressField").val = coords;
+            Maps.geocodeLatLng(coords, setAddr);
+            //$("#addressField").val(coords);
+        Maps.placeMarker(coords);
+            var point = new google.maps.LatLng(50.464379, 30.519131);
+            Maps.calculateRoute(point, coords, Maps.setDuration);
         } else {
-            $("#addressField").val = "";
-            Console.log("Inexistent address.");
+            $("#addressField").val("");
+            //Console.log("Inexistent address.");
         }
 
+    }
+    function setAddr(err, addr) {
+        if(!err){
+            $("#addressField").val(addr);
+        } else {
+            $("#addressField").val("");
+            //Console.log("Inexistent address.");
+        }
     }
 
     $("#addressField").blur(function() {
         //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         var name = $("#addressField").val();
         // if(name!=="" && Maps.geocodeAddress(name, err)) {
-        Maps.geocodeAddress(name, parseCoords);
+        // Maps.geocodeAddress(name, parseCoords);
         if(name!=="") {
             $(".client-address-typo").css("display","none");
             $(".client-address-field").css("border-color", "green");
             addrOK = true;
+            Maps.geocodeAddress(name, parseCoords);
+
         }
         else {
             $(".client-address-typo").css("display","block");
@@ -147,7 +161,12 @@ $(function(){
         }
     });
 });
+
+exports.addrOK = addrOK;
 },{"./maps":4,"./pizza/PizzaCart":5,"./pizza/PizzaMenu":6}],4:[function(require,module,exports){
+var markerWhereTo;
+var map;
+
 function initialize() {
     //Тут починаємо працювати зкартою
     var mapProp = {
@@ -155,7 +174,7 @@ function initialize() {
         zoom: 18
     };
     var html_element = document.getElementById("googleMap");
-    var map	= new google.maps.Map(html_element,	mapProp);
+    map	= new google.maps.Map(html_element,	mapProp);
     //Карта створена і показана
     var point = new google.maps.LatLng(50.464379, 30.519131);
     var marker = new google.maps.Marker({
@@ -172,18 +191,58 @@ function initialize() {
         var coordinates = me.latLng;
         //alert(coordinates);
     });
-
     google.maps.event.addListener(map, 'click', function(me){
         var coordinates = me.latLng;
         geocodeLatLng(coordinates, function(err, address){
             if(!err){
                 //Дізналися адресу
                 console.log(address);
+                $("#addressField").val(address);
+                //$("#addressField").blur();
+
+                $(".client-address-typo").css("display","none");
+                $(".client-address-field").css("border-color", "green");
+                //var addrOK = main.addrOK;
+                module.addrOK = true;
+                placeMarker(coordinates);
+                calculateRoute(point, coordinates, setDuration);
             } else {
                 console.log("Немає адреси");
             }
-        })
+        });
+
+
+
+
+
+        //google.maps.event.addListener(map, 'click', function(event) {
+       //     placeMarker(event.latLng);
+       // });
+        //placeMarker(coordinates);
     });
+}
+
+function placeMarker(location) {
+    if (markerWhereTo) {
+        markerWhereTo.setMap(null);
+    }
+    markerWhereTo = new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: "assets/images/home-icon.png"
+    });
+}
+
+function setDuration(err, duration){
+    //function parseCoords(err, coords) {
+        if (!err) {
+            $("#nameField").val(duration.duration.text);
+        } else {
+            $("#nameField").val("");
+            Console.log("Unknown duration.");
+        }
+
+   // }
 }
 
 function geocodeLatLng(latlng, callback) {
@@ -212,19 +271,21 @@ function geocodeAddress(address, callback){
 }
 
 function	calculateRoute(A_latlng,	B_latlng,	callback)	{
-    vardirectionService =	new	google.maps.DirectionsService();
+    //var directionsDisplay = new google.maps.DirectionsRenderer(); //?
+    var directionService =	new	google.maps.DirectionsService();
     directionService.route({
         origin:	A_latlng,
         destination:	B_latlng,
         travelMode:	google.maps.TravelMode["DRIVING"]
     },	function(response,	status)	{
         if	(	status	==	google.maps.DirectionsStatus.OK )	{
-            varleg	=	response.routes[	0	].legs[	0	];
+            map.setDirections(response);
+            var leg	=	response.routes[	0	].legs[	0	];
             callback(null,	{
                 duration:	leg.duration
             });
             }	else	{
-            callback(new	Error("Can'	not	find	direction"));
+            callback(new	Error("Can	not	find	direction"));
         }
         });
     }
@@ -233,6 +294,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 exports.initialize = initialize;
 exports.geocodeAddress = geocodeAddress;
+exports.geocodeLatLng = geocodeLatLng;
+exports.placeMarker = placeMarker;
+exports.calculateRoute = calculateRoute;
+exports.setDuration = setDuration;
 },{}],5:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.

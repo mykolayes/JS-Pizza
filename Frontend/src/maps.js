@@ -1,3 +1,7 @@
+var markerWhereTo;
+var map;
+var directionsDisplay;
+
 function initialize() {
     //Тут починаємо працювати зкартою
     var mapProp = {
@@ -5,7 +9,7 @@ function initialize() {
         zoom: 18
     };
     var html_element = document.getElementById("googleMap");
-    var map	= new google.maps.Map(html_element,	mapProp);
+    map	= new google.maps.Map(html_element,	mapProp);
     //Карта створена і показана
     var point = new google.maps.LatLng(50.464379, 30.519131);
     var marker = new google.maps.Marker({
@@ -22,18 +26,58 @@ function initialize() {
         var coordinates = me.latLng;
         //alert(coordinates);
     });
-
     google.maps.event.addListener(map, 'click', function(me){
         var coordinates = me.latLng;
         geocodeLatLng(coordinates, function(err, address){
             if(!err){
                 //Дізналися адресу
                 console.log(address);
+                $("#addressField").val(address);
+                //$("#addressField").blur();
+
+                $(".client-address-typo").css("display","none");
+                $(".client-address-field").css("border-color", "green");
+                //var addrOK = main.addrOK;
+                module.addrOK = true;
+                placeMarker(coordinates);
+                calculateRoute(point, coordinates, setDuration);
             } else {
                 console.log("Немає адреси");
             }
-        })
+        });
+
+
+
+
+
+        //google.maps.event.addListener(map, 'click', function(event) {
+       //     placeMarker(event.latLng);
+       // });
+        //placeMarker(coordinates);
     });
+}
+
+function placeMarker(location) {
+    if (markerWhereTo) {
+        markerWhereTo.setMap(null);
+    }
+    markerWhereTo = new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: "assets/images/home-icon.png"
+    });
+}
+
+function setDuration(err, duration){
+    //function parseCoords(err, coords) {
+        if (!err) {
+            $("#nameField").val(duration.duration.text);
+        } else {
+            $("#nameField").val("");
+            Console.log("Unknown duration.");
+        }
+
+   // }
 }
 
 function geocodeLatLng(latlng, callback) {
@@ -60,21 +104,23 @@ function geocodeAddress(address, callback){
         }
     });
 }
-
+//https://stackoverflow.com/questions/14556312/google-maps-v3-create-routes-between-two-points
 function	calculateRoute(A_latlng,	B_latlng,	callback)	{
-    vardirectionService =	new	google.maps.DirectionsService();
+    //directionsDisplay = new google.maps.DirectionsRenderer(); //?
+    var directionService =	new	google.maps.DirectionsService();
     directionService.route({
         origin:	A_latlng,
         destination:	B_latlng,
         travelMode:	google.maps.TravelMode["DRIVING"]
     },	function(response,	status)	{
         if	(	status	==	google.maps.DirectionsStatus.OK )	{
-            varleg	=	response.routes[	0	].legs[	0	];
+            //map.setDirections(response);
+            var leg	=	response.routes[	0	].legs[	0	];
             callback(null,	{
                 duration:	leg.duration
             });
             }	else	{
-            callback(new	Error("Can'	not	find	direction"));
+            callback(new	Error("Can	not	find	direction"));
         }
         });
     }
@@ -83,3 +129,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 exports.initialize = initialize;
 exports.geocodeAddress = geocodeAddress;
+exports.geocodeLatLng = geocodeLatLng;
+exports.placeMarker = placeMarker;
+exports.calculateRoute = calculateRoute;
+exports.setDuration = setDuration;

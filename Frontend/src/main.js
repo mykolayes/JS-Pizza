@@ -1,6 +1,7 @@
 /**
  * Created by chaika on 25.01.16.
  */
+var nameOK, phoneOK, addrOK = false;
 
 $(function(){
     //This code will execute when the page is ready
@@ -14,7 +15,6 @@ $(function(){
     PizzaMenu.initialiseMenu();
     Maps.initialize();
 
-    var nameOK, phoneOK, addrOK = false;
 
     $(".btn-next").click(function(){
         if (nameOK && phoneOK && addrOK) {
@@ -67,23 +67,37 @@ $(function(){
 
     function parseCoords(err, coords) {
         if (!err) {
-            $("#addressField").val = coords;
+            Maps.geocodeLatLng(coords, setAddr);
+            //$("#addressField").val(coords);
+        Maps.placeMarker(coords);
+            var point = new google.maps.LatLng(50.464379, 30.519131);
+            Maps.calculateRoute(point, coords, Maps.setDuration);
         } else {
-            $("#addressField").val = "";
-            Console.log("Inexistent address.");
+            $("#addressField").val("");
+            //Console.log("Inexistent address.");
         }
 
+    }
+    function setAddr(err, addr) {
+        if(!err){
+            $("#addressField").val(addr);
+        } else {
+            $("#addressField").val("");
+            //Console.log("Inexistent address.");
+        }
     }
 
     $("#addressField").blur(function() {
         //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         var name = $("#addressField").val();
         // if(name!=="" && Maps.geocodeAddress(name, err)) {
-        Maps.geocodeAddress(name, parseCoords);
+        // Maps.geocodeAddress(name, parseCoords);
         if(name!=="") {
             $(".client-address-typo").css("display","none");
             $(".client-address-field").css("border-color", "green");
             addrOK = true;
+            Maps.geocodeAddress(name, parseCoords);
+
         }
         else {
             $(".client-address-typo").css("display","block");
@@ -92,3 +106,5 @@ $(function(){
         }
     });
 });
+
+exports.addrOK = addrOK;
