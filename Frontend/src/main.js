@@ -1,23 +1,23 @@
 /**
  * Created by chaika on 25.01.16.
  */
-var nameOK, phoneOK, addrOK = false;
+
 
 $(function(){
     //This code will execute when the page is ready
     var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
     //var Pizza_List = require('./Pizza_List');
-    //var Order = require('./Order');
+    var Order = require('./Order');
     var Maps = require('./maps');
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
-    Maps.initialize();
+    //Maps.initialize();
 
 
     $(".btn-next").click(function(){
-        if (nameOK && phoneOK && addrOK) {
+        if (Order.nameOK && Order.phoneOK && Order.addrOK) {
        PizzaCart.createOrder(function (err, data) {
            if (err) {
                alert("Can't create order!");
@@ -41,12 +41,12 @@ $(function(){
         if(name!=="") {
             $(".client-name-typo").css("display","none");
             $(".client-name-field").css("border-color", "green");
-            nameOK = true;
+            Order.nameOK = true;
         }
         else {
             $(".client-name-typo").css("display","block");
             $(".client-name-field").css("border-color", "red");
-            nameOK = false;
+            Order.nameOK = false;
         }
     });
 
@@ -56,12 +56,12 @@ $(function(){
         if(!phone_num.match(/^[+0-9()]+$/g) !== null && (phone_num.length == 12 || phone_num.length == 13 || phone_num.length == 14 || phone_num.length == 15)) {
             $(".client-phone-typo").css("display","none");
             $(".client-phone-field").css("border-color", "green");
-            phoneOK = true;
+            Order.phoneOK = true;
         }
         else {
             $(".client-phone-typo").css("display","block");
             $(".client-phone-field").css("border-color", "red");
-            phoneOK = false;
+            Order.phoneOK = false;
         }
     });
 
@@ -95,16 +95,16 @@ $(function(){
         if(name!=="") {
             $(".client-address-typo").css("display","none");
             $(".client-address-field").css("border-color", "green");
-            addrOK = true;
+            Order.addrOK = true;
             Maps.geocodeAddress(name, parseCoords);
 
         }
         else {
             $(".client-address-typo").css("display","block");
             $(".client-address-field").css("border-color", "red");
-            addrOK = false;
+            Order.addrOK = false;
         }
     });
 });
 
-exports.addrOK = addrOK;
+// exports.addrOK = addrOK;

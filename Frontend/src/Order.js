@@ -1,4 +1,4 @@
-
+var nameOK, phoneOK, addrOK = false;
 //
 // function checkName() {
 //     //if(this.value) {
@@ -11,3 +11,7 @@
 // }
 //
 // exports.checkName = checkName;
+
+exports.nameOK = nameOK;
+exports.phoneOK = phoneOK;
+exports.addrOK = addrOK;

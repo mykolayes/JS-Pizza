@@ -5,6 +5,7 @@
 
 .order-page-layout {
   background-color: lightyellow;
+  margin-top: @TopPanelHeight;
   margin-right: @RightPanelWidth;
   .minus, .del, .plus, .btn-order, .clear-orders {
     display: none;
@@ -12,11 +13,12 @@
 }
 
   .order-field {
-    margin-top: @TopPanelHeight;
+    //margin-top: @TopPanelHeight;
+    margin-right: 60px;
     //margin-right: @RightPanelWidth;
     position: relative;
     display: inline-block;
-    width: 50%;
+    width: 45%;
     //text-align: center;
     padding-top: 60px;
 //    padding-left: 30%;
@@ -28,7 +30,7 @@
     //padding: 10px;
   }
 
-    .client-contact-info {
+    .client-contact-info, .order-details-info {
       font-size: 20px;
     }
 
@@ -55,6 +57,39 @@
       color: red;
       display: none;
     }
+
+    //.order-details-field {
+    //  display: inline-block;
+    //}
+  .order-details-field {
+    vertical-align: top;
+    min-width: 370px;
+    //margin-top: @TopPanelHeight;
+    //margin-right: @RightPanelWidth;
+    position: relative;
+    display: inline-block;
+    width: 45%;
+    height: 300px;
+    //text-align: center;
+    padding-top: 60px;
+    //    padding-left: 30%;
+    padding-left: 40px;
+
+    //max-width: 1000px;
+    //min-width: 300px;
+    //margin:auto;
+    //padding: 10px;
+
+  }
+  .order-eta-field, .order-eta-prefix {
+    font-size: 20px;
+
+    display: inline-block;
+    width: 370px;
+    max-width: 370px;
+    min-width: 370px;
+  }
+
     //map
 .googleMap {
   display: block;

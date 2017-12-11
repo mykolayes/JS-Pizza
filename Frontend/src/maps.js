@@ -2,6 +2,8 @@ var markerWhereTo;
 var map;
 var directionsDisplay;
 
+var Order = require('./Order');
+
 function initialize() {
     //Тут починаємо працювати зкартою
     var mapProp = {
@@ -38,7 +40,7 @@ function initialize() {
                 $(".client-address-typo").css("display","none");
                 $(".client-address-field").css("border-color", "green");
                 //var addrOK = main.addrOK;
-                module.addrOK = true;
+                Order.addrOK = true;
                 placeMarker(coordinates);
                 calculateRoute(point, coordinates, setDuration);
             } else {
@@ -71,9 +73,11 @@ function placeMarker(location) {
 function setDuration(err, duration){
     //function parseCoords(err, coords) {
         if (!err) {
-            $("#nameField").val(duration.duration.text);
+            //$("#nameField").val(duration.duration.text);
+            $("#order-eta-field").text(duration.duration.text);
         } else {
-            $("#nameField").val("");
+            //$("#nameField").val("");
+            $("#order-eta-field").text(duration.duration.text);
             Console.log("Unknown duration.");
         }
 
@@ -115,7 +119,7 @@ function	calculateRoute(A_latlng,	B_latlng,	callback)	{
     },	function(response,	status)	{
         if	(	status	==	google.maps.DirectionsStatus.OK )	{
             //map.setDirections(response);
-            var leg	=	response.routes[	0	].legs[	0	];
+            var leg	=	response.routes[0].legs[0];
             callback(null,	{
                 duration:	leg.duration
             });
