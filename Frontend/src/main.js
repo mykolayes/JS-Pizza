@@ -18,15 +18,16 @@ $(function(){
 
     $(".btn-next").click(function(){
         if (Order.nameOK && Order.phoneOK && Order.addrOK) {
-       PizzaCart.createOrder(function (err, data) {
+            var data = PizzaCart.getPizzaInCart();
+       PizzaCart.createOrderx(function (err, data) {
            if (err) {
                alert("Can't create order!");
            } else {
-//               alert("Order successfully created" + JSON.stringify(data));
+               alert("Order successfully created" + JSON.stringify(data));
                alert("Order successfully created.");
 
-               PizzaCart.clearOrder();
-               window.location = "./";
+               //PizzaCart.clearOrder();
+               //window.location = "./";
            }
        })
         }

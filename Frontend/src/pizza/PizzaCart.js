@@ -223,8 +223,9 @@ function clearOrder() {
     updateCart();
 }
 
-function createOrder(callback) {
+function createOrderx(callback) {
     API.createOrder({
+        // name: "client name tbd",
         name: "client name tbd",
         phone: "890900008822",
         order: Cart
@@ -246,5 +247,5 @@ exports.PizzaSize = PizzaSize;
 
 exports.updateCart = updateCart;
 
-exports.createOrder = createOrder;
+exports.createOrderx = createOrderx;
 exports.clearOrder = clearOrder;

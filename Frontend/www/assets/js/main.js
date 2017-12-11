@@ -58,6 +58,7 @@ var nameOK, phoneOK, addrOK = false;
 exports.nameOK = nameOK;
 exports.phoneOK = phoneOK;
 exports.addrOK = addrOK;
+
 },{}],3:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
@@ -91,15 +92,16 @@ $(function(){
 
     $(".btn-next").click(function(){
         if (Order.nameOK && Order.phoneOK && Order.addrOK) {
-       PizzaCart.createOrder(function (err, data) {
+            var data = PizzaCart.getPizzaInCart();
+       PizzaCart.createOrderx(function (err, data) {
            if (err) {
                alert("Can't create order!");
            } else {
-//               alert("Order successfully created" + JSON.stringify(data));
+               alert("Order successfully created" + JSON.stringify(data));
                alert("Order successfully created.");
 
-               PizzaCart.clearOrder();
-               window.location = "./";
+               //PizzaCart.clearOrder();
+               //window.location = "./";
            }
        })
         }
@@ -547,8 +549,9 @@ function clearOrder() {
     updateCart();
 }
 
-function createOrder(callback) {
+function createOrderx(callback) {
     API.createOrder({
+        // name: "client name tbd",
         name: "client name tbd",
         phone: "890900008822",
         order: Cart
@@ -570,7 +573,7 @@ exports.PizzaSize = PizzaSize;
 
 exports.updateCart = updateCart;
 
-exports.createOrder = createOrder;
+exports.createOrderx = createOrderx;
 exports.clearOrder = clearOrder;
 },{"../API":1,"../Templates":3,"basil.js":8}],7:[function(require,module,exports){
 /**
