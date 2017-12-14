@@ -19,17 +19,43 @@ $(function(){
     $(".btn-next").click(function(){
         if (Order.nameOK && Order.phoneOK && Order.addrOK) {
             var data = PizzaCart.getPizzaInCart();
-       PizzaCart.createOrderx(function (err, data) {
+       PizzaCart.createOrder(function (err, data) {
            if (err) {
                alert("Can't create order!");
            } else {
                alert("Order successfully created" + JSON.stringify(data));
                alert("Order successfully created.");
+               // var order = PizzaCart.createOrderx(function(){
+               //
+               // });
+
+               // PizzaCart.createOrder(function(err, result){
+               //     if (err) {
+               //         return callback(err);
+               //     }
+               //     callback(null, result);
+               // });
+
+               LiqPayCheckout.init({
+                   data: data.data,
+                   signature:	data.signature,
+                   embedTo:	"#liqpay",
+                   mode:	"popup"	//	embed	||	popup
+               }).on("liqpay.callback",	function(data){
+                   console.log(data.status);
+                   console.log(data);
+               }).on("liqpay.ready",	function(data){
+//	ready
+               }).on("liqpay.close",	function(data){
+//	close
+                   PizzaCart.clearOrder();
+                   window.location = "./";
+               });
 
                //PizzaCart.clearOrder();
                //window.location = "./";
            }
-       })
+       });
         }
         else {
             alert("Missing or incorrect contact details!");

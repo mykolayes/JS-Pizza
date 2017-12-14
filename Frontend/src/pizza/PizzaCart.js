@@ -58,7 +58,8 @@ function addToCart(pizza, size) {
             size: size,
             quantity: 1,
             price: pizza[size].price,
-            content: pizza.content
+            content: pizza.content,
+            title: pizza.title
         });
     }
     else {
@@ -223,11 +224,13 @@ function clearOrder() {
     updateCart();
 }
 
-function createOrderx(callback) {
+function createOrder(callback) {
     API.createOrder({
         // name: "client name tbd",
-        name: "client name tbd",
-        phone: "890900008822",
+        name: $("#nameField").value,
+        phone: $("#phoneField").value,
+        address: $("#addressField").value,
+        sum: Number($("#order-price-int").text()), //to be removed
         order: Cart
     }, function(err, result){
        if (err) {
@@ -247,5 +250,5 @@ exports.PizzaSize = PizzaSize;
 
 exports.updateCart = updateCart;
 
-exports.createOrderx = createOrderx;
+exports.createOrder = createOrder;
 exports.clearOrder = clearOrder;
